@@ -22,7 +22,7 @@ common_cflags := \
 	-DHAVE_CONFIG_H \
 	-Wall -fno-common -g -O2
 
-	
+
 #-fvisibility=hidden - ToDo: restrict to explicitely exported functions
 
 
@@ -60,7 +60,7 @@ LOCAL_SRC_FILES := \
 	src/common/compat_strlcpy.c \
 	src/common/compat_getpass.c \
 	src/common/compat_getopt.c 
-	
+
 LOCAL_CFLAGS		:= $(common_cflags) \
 	-DANDROID_TARGET
 
@@ -85,7 +85,7 @@ LOCAL_SRC_FILES := \
 	src/common/compat_strlcpy.c \
 	src/common/compat_getpass.c 
 
-	
+
 LOCAL_CFLAGS		:= $(common_cflags) \
 	-DANDROID_TARGET
 
@@ -104,7 +104,7 @@ LOCAL_SRC_FILES := \
 	src/libopensc/sc.c \
 	src/libopensc/card-rutoken.c \
 	src/libopensc/card-incrypto34.c \
- 	src/libopensc/card-piv.c \
+	src/libopensc/card-piv.c \
 	src/libopensc/pkcs15-piv.c \
 	src/libopensc/card-belpic.c \
 	src/libopensc/pkcs15-cache.c \
@@ -182,7 +182,7 @@ LOCAL_SRC_FILES := \
 
 
 
-	
+
 LOCAL_CFLAGS		:= $(common_cflags) \
 	-DOPENSC_CONF_PATH=\"/etc/opensc.conf\" \
 	-DANDROID_TARGET
@@ -223,7 +223,7 @@ LOCAL_SRC_FILES := \
 	src/common/compat_strlcpy.c \
 	src/common/compat_getpass.c 
 
-	
+
 LOCAL_CFLAGS		:= $(common_cflags) \
 	-DSC_PKCS15_PROFILE_DIRECTORY=\"/usr/share/opensc\" \
 	-DANDROID_TARGET
@@ -277,7 +277,7 @@ LOCAL_STATIC_LIBRARIES := \
 	libopensc \
 	libscconf \
 	libpcsclite 
-	
+
 LOCAL_MODULE		:= opensc-pkcs11  
 LOCAL_MODULE_TAGS	:= optional
 include $(BUILD_SHARED_LIBRARY)
@@ -319,7 +319,7 @@ LOCAL_STATIC_LIBRARIES := \
 		libopensc \
 		libscconf \
 		libpcsclite
-	
+
 LOCAL_MODULE		:= opensc-tool
 LOCAL_MODULE_TAGS	:= optional
 include $(BUILD_EXECUTABLE)
@@ -342,7 +342,7 @@ LOCAL_STATIC_LIBRARIES := \
 		libscconf \
 		libpkcs11 \
 		libpcsclite
-	
+
 LOCAL_MODULE		:= pkcs11-tool
 LOCAL_MODULE_TAGS	:= optional
 include $(BUILD_EXECUTABLE)
@@ -365,7 +365,7 @@ LOCAL_STATIC_LIBRARIES := \
 		libopensc \
 		libscconf \
 		libpcsclite
-	
+
 LOCAL_MODULE		:= pkcs15-tool
 LOCAL_MODULE_TAGS	:= optional
 include $(BUILD_EXECUTABLE)
@@ -389,7 +389,7 @@ LOCAL_STATIC_LIBRARIES := \
 		libscconf \
 		libpkcs15init \
 		libpcsclite 
-	
+
 LOCAL_MODULE		:= pkcs15-init
 LOCAL_MODULE_TAGS	:= optional
 include $(BUILD_EXECUTABLE)

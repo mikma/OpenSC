@@ -20,6 +20,8 @@ LOCAL_PATH   := $(call my-dir)
 common_cflags := \
 	-DANDROID \
 	-DHAVE_CONFIG_H \
+	-DOPENSSL_NO_GOST \
+	-DOPENSSL_NO_CAST \
 	-Wall -fno-common -g -O2
 
 
@@ -28,6 +30,8 @@ common_cflags := \
 
 common_c_includes := \
 	$(LOCAL_PATH) \
+	$(LOCAL_PATH)/jni \
+	$(LOCAL_PATH)/src \
 	$(LOCAL_PATH)/src/common \
 	$(LOCAL_PATH)/src/libopensc \
 	$(LOCAL_PATH)/src/pkcs11 \
@@ -38,7 +42,6 @@ common_c_includes := \
 	$(LOCAL_PATH)/src/tests \
 	$(LOCAL_PATH)/src/tools \
 	$(LOCAL_PATH)/src/include \
-	external/openssl/include \
 	external/pcsc/pcsc-lite/src/PCSC
 
 
@@ -59,7 +62,9 @@ LOCAL_SRC_FILES := \
 	src/common/compat_dummy.c \
 	src/common/compat_strlcpy.c \
 	src/common/compat_getpass.c \
-	src/common/compat_getopt.c 
+	src/common/compat_getopt.c \
+	src/common/simclist.c \
+	src/common/libscdl.c \
 
 LOCAL_CFLAGS		:= $(common_cflags) \
 	-DANDROID_TARGET
@@ -118,7 +123,6 @@ LOCAL_SRC_FILES := \
 	src/libopensc/pkcs15-gemsafeV1.c \
 	src/libopensc/pkcs15-gemsafeGPK.c \
 	src/libopensc/pkcs15-algo.c \
-	src/libopensc/ui.c \
 	src/libopensc/ctx.c \
 	src/libopensc/compression.c \
 	src/libopensc/pkcs15-tccardos.c \
@@ -146,7 +150,6 @@ LOCAL_SRC_FILES := \
 	src/libopensc/card-westcos.c \
 	src/libopensc/pkcs15-starcert.c \
 	src/libopensc/pkcs15-sec.c \
-	src/libopensc/emv.c \
 	src/libopensc/reader-pcsc.c \
 	src/libopensc/base64.c \
 	src/libopensc/card-gemsafeV1.c \
@@ -166,20 +169,33 @@ LOCAL_SRC_FILES := \
 	src/libopensc/card-atrust-acos.c \
 	src/libopensc/card-oberthur.c \
 	src/libopensc/pkcs15-infocamere.c \
-	src/libopensc/card-emv.c \
 	src/libopensc/card-acos5.c \
 	src/libopensc/card-starcos.c \
-	src/libopensc/pkcs15-wrap.c \
 	src/libopensc/card-gpk.c \
 	src/libopensc/pkcs15-pubkey.c \
 	src/libopensc/card-cardos.c \
-	src/libopensc/p15emu-westcos.c \
 	src/libopensc/card-miocos.c \
+	src/libopensc/card-authentic.c \
+	src/libopensc/pkcs15-westcos.c \
+	src/libopensc/ef-atr.c \
+	src/libopensc/iasecc-sdo.c \
+	src/libopensc/card-ias.c \
+	src/libopensc/card-iasecc.c \
+	src/libopensc/card-itacns.c \
+	src/libopensc/card-javacard.c \
+	src/libopensc/pkcs15-itacns.c \
+	src/libopensc/pkcs15-pteid.c \
+	src/libopensc/pkcs15-oberthur.c \
 	src/common/compat_dummy.c \
 	src/common/compat_getopt.c  \
 	src/common/compat_strlcpy.c \
 	src/common/compat_getpass.c 
 
+#	src/libopensc/ui.c 
+#	src/libopensc/emv.c
+#	src/libopensc/card-emv.c \
+#	src/libopensc/pkcs15-wrap.c \
+#	src/libopensc/p15emu-westcos.c \
 
 
 
@@ -189,7 +205,8 @@ LOCAL_CFLAGS		:= $(common_cflags) \
 
 LOCAL_C_INCLUDES	:= $(common_c_includes)
 LOCAL_PRELINK_MODULE	:= false
-LOCAL_STATIC_LIBRARIES	:= libpcsclite
+LOCAL_SHARED_LIBRARIES	:= libcrypto libpcsclite
+LOCAL_STATIC_LIBRARIES	:= libcompat
 LOCAL_MODULE		:= libopensc
 
 include $(BUILD_STATIC_LIBRARY)
@@ -203,7 +220,6 @@ LOCAL_SRC_FILES := \
 	src/pkcs15init/pkcs15-cardos.c \
 	src/pkcs15init/pkcs15-jcop.c \
 	src/pkcs15init/pkcs15-muscle.c \
-	src/pkcs15init/keycache.c \
 	src/pkcs15init/pkcs15-starcos.c \
 	src/pkcs15init/profile.c \
 	src/pkcs15init/pkcs15-asepcos.c \
@@ -214,21 +230,26 @@ LOCAL_SRC_FILES := \
 	src/pkcs15init/pkcs15-cflex.c \
 	src/pkcs15init/pkcs15-myeid.c \
 	src/pkcs15init/pkcs15-oberthur.c \
+	src/pkcs15init/pkcs15-oberthur-awp.c \
 	src/pkcs15init/pkcs15-setcos.c \
 	src/pkcs15init/pkcs15-rutoken.c \
 	src/pkcs15init/pkcs15-entersafe.c \
 	src/pkcs15init/pkcs15-rtecp.c \
+	src/pkcs15init/pkcs15-authentic.c \
+	src/pkcs15init/pkcs15-iasecc.c \
 	src/common/compat_dummy.c \
 	src/common/compat_getopt.c  \
 	src/common/compat_strlcpy.c \
 	src/common/compat_getpass.c 
 
+#	src/pkcs15init/keycache.c 
 
 LOCAL_CFLAGS		:= $(common_cflags) \
 	-DSC_PKCS15_PROFILE_DIRECTORY=\"/usr/share/opensc\" \
 	-DANDROID_TARGET
 
 LOCAL_C_INCLUDES	:= $(common_c_includes)
+LOCAL_SHARED_LIBRARIES := libcrypto libc libdl
 LOCAL_PRELINK_MODULE	:= false
 LOCAL_MODULE		:= libpkcs15init
 
@@ -240,11 +261,12 @@ include $(BUILD_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-	src/pkcs11/libpkcs11.c \
+	src/common/libpkcs11.c \
 
 LOCAL_C_INCLUDES	:= $(common_c_includes)	
 LOCAL_PRELINK_MODULE	:= false
 LOCAL_CFLAGS		:= $(common_cflags) 
+LOCAL_STATIC_LIBRARIES	:= libcompat
 LOCAL_MODULE		:= libpkcs11  
 include $(BUILD_STATIC_LIBRARY)
 
@@ -261,12 +283,13 @@ LOCAL_SRC_FILES := \
 	src/pkcs11/slot.c \
 	src/pkcs11/mechanism.c \
 	src/pkcs11/openssl.c \
-	src/pkcs11/secretkey.c \
 	src/pkcs11/framework-pkcs15.c \
 	src/pkcs11/framework-pkcs15init.c \
 	src/pkcs11/debug.c \
 	src/pkcs11/hack-disabled.c \
+	src/pkcs11/pkcs11-display.c \
 
+#	src/pkcs11/secretkey.c \
 
 LOCAL_C_INCLUDES	:= $(common_c_includes)	
 LOCAL_PRELINK_MODULE	:= false
@@ -315,9 +338,9 @@ LOCAL_CFLAGS		:= $(common_cflags)
 LOCAL_LDLIBS		:= -ldl
 LOCAL_SHARED_LIBRARIES := libc libcrypto libdl
 LOCAL_STATIC_LIBRARIES := \
-		libcompat \
 		libopensc \
 		libscconf \
+		libcompat \
 		libpcsclite
 
 LOCAL_MODULE		:= opensc-tool
@@ -337,10 +360,10 @@ LOCAL_PRELINK_MODULE	:= false
 LOCAL_CFLAGS		:= $(common_cflags) 
 LOCAL_SHARED_LIBRARIES := libc libcrypto libdl
 LOCAL_STATIC_LIBRARIES := \
-		libcompat \
 		libopensc \
 		libscconf \
 		libpkcs11 \
+		libcompat \
 		libpcsclite
 
 LOCAL_MODULE		:= pkcs11-tool
@@ -361,9 +384,9 @@ LOCAL_PRELINK_MODULE	:= false
 LOCAL_CFLAGS		:= $(common_cflags) 
 LOCAL_SHARED_LIBRARIES := libc libcrypto libdl
 LOCAL_STATIC_LIBRARIES := \
-		libcompat \
 		libopensc \
 		libscconf \
+		libcompat \
 		libpcsclite
 
 LOCAL_MODULE		:= pkcs15-tool
@@ -384,13 +407,15 @@ LOCAL_PRELINK_MODULE	:= false
 LOCAL_CFLAGS		:= $(common_cflags) 
 LOCAL_SHARED_LIBRARIES := libc libcrypto libdl
 LOCAL_STATIC_LIBRARIES := \
-		libcompat \
 		libopensc \
 		libscconf \
 		libpkcs15init \
+		libcompat \
 		libpcsclite 
 
 LOCAL_MODULE		:= pkcs15-init
 LOCAL_MODULE_TAGS	:= optional
 include $(BUILD_EXECUTABLE)
 
+$(call import-module,openssl)
+$(call import-module,pcsc-lite-1.8.6)

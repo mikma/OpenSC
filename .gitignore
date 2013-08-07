@@ -74,3 +74,6 @@ p15dump
 prngtest
 base64
 lottery
+gen/
+libs/
+obj/

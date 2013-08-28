@@ -505,7 +505,7 @@ pgp_new_blob(sc_card_t *card, struct blob *parent, unsigned int file_id,
 			u8 id_str[2];
 
 			/* no parent: set file's path = file's id */
-			sc_format_path(ushort2bebytes(id_str, file_id), &blob->file->path);
+			sc_format_path((const char*)ushort2bebytes(id_str, file_id), &blob->file->path);
 		}
 
 		/* find matching DO info: set file type depending on it */

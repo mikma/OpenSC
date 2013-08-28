@@ -61,7 +61,6 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
 	src/common/compat_dummy.c \
 	src/common/compat_strlcpy.c \
-	src/common/compat_getpass.c \
 	src/common/compat_getopt.c \
 	src/common/simclist.c \
 	src/common/libscdl.c \
@@ -85,11 +84,6 @@ LOCAL_SRC_FILES := \
 	src/scconf/parse.c \
 	src/scconf/write.c \
 	src/scconf/sclex.c \
-	src/common/compat_dummy.c \
-	src/common/compat_getopt.c  \
-	src/common/compat_strlcpy.c \
-	src/common/compat_getpass.c 
-
 
 LOCAL_CFLAGS		:= $(common_cflags) \
 	-DANDROID_TARGET
@@ -186,10 +180,6 @@ LOCAL_SRC_FILES := \
 	src/libopensc/pkcs15-itacns.c \
 	src/libopensc/pkcs15-pteid.c \
 	src/libopensc/pkcs15-oberthur.c \
-	src/common/compat_dummy.c \
-	src/common/compat_getopt.c  \
-	src/common/compat_strlcpy.c \
-	src/common/compat_getpass.c 
 
 #	src/libopensc/ui.c 
 #	src/libopensc/emv.c
@@ -237,10 +227,6 @@ LOCAL_SRC_FILES := \
 	src/pkcs15init/pkcs15-rtecp.c \
 	src/pkcs15init/pkcs15-authentic.c \
 	src/pkcs15init/pkcs15-iasecc.c \
-	src/common/compat_dummy.c \
-	src/common/compat_getopt.c  \
-	src/common/compat_strlcpy.c \
-	src/common/compat_getpass.c 
 
 #	src/pkcs15init/keycache.c 
 

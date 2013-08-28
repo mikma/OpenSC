@@ -796,7 +796,6 @@ static int jcop_decipher(sc_card_t *card,
 }
  
 static int jcop_generate_key(sc_card_t *card, struct sc_cardctl_jcop_genkey *a) {
-     int modlen;
      int r;
      sc_apdu_t apdu;
      u8 rbuf[SC_MAX_APDU_BUFFER_SIZE];
@@ -876,7 +875,6 @@ static int jcop_generate_key(sc_card_t *card, struct sc_cardctl_jcop_genkey *a) 
      if (rbuf[0] != 0x4) {
 	  return SC_ERROR_INVALID_DATA;
      }
-     modlen=rbuf[1] * 32;
      if (a->pubkey_len < rbuf[1])
 	  return SC_ERROR_BUFFER_TOO_SMALL;
      a->pubkey_len=rbuf[1] * 4;

@@ -309,7 +309,7 @@ iasecc_file_convert_acls(struct sc_context *ctx, struct sc_profile *profile, str
 	int ii;
 
 	for (ii=0; ii<SC_MAX_AC_OPS;ii++)   {
-		struct sc_acl_entry *acl = sc_file_get_acl_entry(file, ii);
+		struct sc_acl_entry *acl = (struct sc_acl_entry *)sc_file_get_acl_entry(file, ii);
 
 		if (acl)   {
 			switch (acl->method)   {				

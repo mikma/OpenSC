@@ -3591,7 +3591,9 @@ static int test_unwrap(CK_SESSION_HANDLE sess)
 		errors += wrap_unwrap(sess, EVP_des_cbc(), privKeyObject);
 		errors += wrap_unwrap(sess, EVP_des_ede3_cbc(), privKeyObject);
 		errors += wrap_unwrap(sess, EVP_bf_cbc(), privKeyObject);
+# ifndef ANDROID
 		errors += wrap_unwrap(sess, EVP_cast5_cfb(), privKeyObject);
+# endif
 #endif
 	}
 

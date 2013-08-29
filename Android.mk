@@ -195,7 +195,7 @@ LOCAL_CFLAGS		:= $(common_cflags) \
 
 LOCAL_C_INCLUDES	:= $(common_c_includes)
 LOCAL_PRELINK_MODULE	:= false
-LOCAL_SHARED_LIBRARIES	:= libcrypto libpcsclite
+LOCAL_SHARED_LIBRARIES	:= libcrypto
 LOCAL_STATIC_LIBRARIES	:= libcompat
 LOCAL_MODULE		:= libopensc
 
@@ -285,7 +285,6 @@ LOCAL_STATIC_LIBRARIES := \
 	libpkcs15init \
 	libopensc \
 	libscconf \
-	libpcsclite 
 
 LOCAL_MODULE		:= opensc-pkcs11  
 LOCAL_MODULE_TAGS	:= optional
@@ -327,7 +326,6 @@ LOCAL_STATIC_LIBRARIES := \
 		libopensc \
 		libscconf \
 		libcompat \
-		libpcsclite
 
 LOCAL_MODULE		:= opensc-tool
 LOCAL_MODULE_TAGS	:= optional
@@ -350,7 +348,6 @@ LOCAL_STATIC_LIBRARIES := \
 		libscconf \
 		libpkcs11 \
 		libcompat \
-		libpcsclite
 
 LOCAL_MODULE		:= pkcs11-tool
 LOCAL_MODULE_TAGS	:= optional
@@ -373,7 +370,6 @@ LOCAL_STATIC_LIBRARIES := \
 		libopensc \
 		libscconf \
 		libcompat \
-		libpcsclite
 
 LOCAL_MODULE		:= pkcs15-tool
 LOCAL_MODULE_TAGS	:= optional
@@ -397,7 +393,6 @@ LOCAL_STATIC_LIBRARIES := \
 		libscconf \
 		libpkcs15init \
 		libcompat \
-		libpcsclite 
 
 LOCAL_MODULE		:= pkcs15-init
 LOCAL_MODULE_TAGS	:= optional

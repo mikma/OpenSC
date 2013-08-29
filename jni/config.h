@@ -5,7 +5,7 @@
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
 /* Default PC/SC provider */
-#define DEFAULT_PCSC_PROVIDER "/usr/lib/libpcsclite.so.1"
+#define DEFAULT_PCSC_PROVIDER "libpcsclite.so"
 
 /* Use iconv libraries and header files */
 /* #undef ENABLE_ICONV */
@@ -143,7 +143,7 @@
 #define LT_OBJDIR ".libs/"
 
 /* Enabled OpenSC features */
-#define OPENSC_FEATURES " openssl pcsc(/usr/lib/libpcsclite.so.1)"
+#define OPENSC_FEATURES " openssl pcsc(libpcsclite.so)"
 
 /* OpenSC version fix component */
 #define OPENSC_VERSION_FIX 13

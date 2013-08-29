@@ -286,6 +286,7 @@ LOCAL_STATIC_LIBRARIES := \
 	libopensc \
 	libscconf \
 
+LOCAL_LDLIBS		:= -llog
 LOCAL_MODULE		:= opensc-pkcs11  
 LOCAL_MODULE_TAGS	:= optional
 include $(BUILD_SHARED_LIBRARY)
@@ -320,7 +321,7 @@ LOCAL_SRC_FILES := \
 LOCAL_C_INCLUDES	:= $(common_c_includes)	
 LOCAL_PRELINK_MODULE	:= false
 LOCAL_CFLAGS		:= $(common_cflags) 
-LOCAL_LDLIBS		:= -ldl
+LOCAL_LDLIBS		:= -llog -ldl
 LOCAL_SHARED_LIBRARIES := libc libcrypto libdl
 LOCAL_STATIC_LIBRARIES := \
 		libopensc \
@@ -371,6 +372,7 @@ LOCAL_STATIC_LIBRARIES := \
 		libscconf \
 		libcompat \
 
+LOCAL_LDLIBS		:= -llog
 LOCAL_MODULE		:= pkcs15-tool
 LOCAL_MODULE_TAGS	:= optional
 include $(BUILD_EXECUTABLE)
@@ -394,6 +396,7 @@ LOCAL_STATIC_LIBRARIES := \
 		libpkcs15init \
 		libcompat \
 
+LOCAL_LDLIBS		:= -llog
 LOCAL_MODULE		:= pkcs15-init
 LOCAL_MODULE_TAGS	:= optional
 include $(BUILD_EXECUTABLE)
